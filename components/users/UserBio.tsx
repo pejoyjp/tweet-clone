@@ -5,6 +5,7 @@ import {format} from 'date-fns'
 import Button from '../Button'
 import { BiCalendar } from 'react-icons/bi'
 import useEitModal from '@/hooks/useEidtModal'
+import useFollow from '@/hooks/useFollow'
 
 type Props = {
     userId:string
@@ -14,6 +15,9 @@ const UserBio:React.FC<Props> = ({userId}) => {
     const {data:currentUser} = useCurrentUser()
     const {data:fetchedUser} = useUser(userId)
     const eidtModal = useEitModal()
+
+    const {isFollowing,toggleFollow} = useFollow(userId)
+
 
     const createdAt = useMemo(()=>{
         if(!fetchedUser?.createdAt){
@@ -28,7 +32,8 @@ const UserBio:React.FC<Props> = ({userId}) => {
                     currentUser?.id === userId ?(
                         <Button secondary label='Edit' onClick={eidtModal.onOpen} />
                     ):(
-                        <Button onClick={()=>{}} label="Follow" secondary />
+                        <Button onClick={toggleFollow} label={isFollowing?'Unfollow':'Follow'} 
+                                secondary ={!isFollowing} outline={isFollowing}/>
                     )
                 }
             </div>

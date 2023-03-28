@@ -7,7 +7,7 @@ type Props = {
 }
 
 const PostFeed:React.FC<Props> = ({userId}) => {
-    const {data:posts = []} = usePosts(userId as string)
+    const {data:posts = []} = usePosts(userId)
 
   return (
     <div>

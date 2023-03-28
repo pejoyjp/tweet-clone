@@ -24,6 +24,7 @@ const Sidebar = (props: Props) => {
       label: 'Notifications',
       href: '/notifications',
       auth: true,
+      alert:currentUser?.hasNotification
     },
     {
       icon: FaUser,
@@ -40,7 +41,7 @@ const Sidebar = (props: Props) => {
           {items.map(item=>(
             <SidebarItem key={item.href} href={item.href} 
                         label={item.label} icon={item.icon}
-                        auth={item.auth}              
+                        auth={item.auth}   alert={item.alert}           
             />
           ))}
           {currentUser && (<SidebarItem onClick={()=>signOut()} icon={BiLogOut} label='Logout' href='sawe'/>)}
